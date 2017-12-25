@@ -1,0 +1,7 @@
+server: 
+  port: 8001
+
+book: 
+  name: bookdev
+  prize: 1
+  

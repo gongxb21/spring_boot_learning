@@ -1,0 +1,28 @@
+#这个优先级较高
+
+#自定义配置
+book: 
+
+  #要对齐，有几个空格无所谓
+  name: ${book.name}
+  author: ${book.author}
+  prize: aha
+  publisDate: ${publishDate}
+  desc: ${book.name} is a domain name
+  
+
+
+  
+
+#spring jsckson
+#spring jsckson
+spring: 
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    
+    
+    
+#端口
+server:
+  port: 8080

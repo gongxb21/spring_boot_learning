@@ -1,0 +1,14 @@
+server:
+  port: 9000
+spring: 
+  profiles:
+    active: dev 
+  datasource: 
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    data-password: 123
+  jpa: 
+    hibernate:
+      ddl-auto: create 
+    show-sql: true

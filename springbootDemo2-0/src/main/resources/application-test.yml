@@ -1,0 +1,6 @@
+server: 
+  port: 8002
+ 
+book: 
+  name: booktest
+  prize: 2
