@@ -14,4 +14,5 @@ import com.gongxb21.demo.bean.User;
  */
 public interface UserRepository  extends JpaRepository<User,Integer>,JpaSpecificationExecutor<User>{
 	List<User> findByNameLike(String name);
+	
 }

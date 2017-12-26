@@ -1,5 +1,6 @@
 package com.gongxb21.demo.json;
 
+import com.gongxb21.demo.bean.MyExceptionEnum;
 
 /**
  * @author gongxb
@@ -7,72 +8,62 @@ package com.gongxb21.demo.json;
  * 2017年12月25日
  */
 public class AjaxResult {
-	private static final String SUCCESS="OK";
-	private static final String FAIL="ERROR";
-	
-	private Meta meta;
+	private static final int SUCCESS=0;
 	private Object data;
+	private int code;
+	private String errMsg;
 	
-	
-	public Meta getMeta() {
-		return meta;
+	public int getCode() {
+		return code;
 	}
 
-
-	public void setMeta(Meta meta) {
-		this.meta = meta;
+	public void setCode(int code) {
+		this.code = code;
 	}
 
+	public String getErrMsg() {
+		return errMsg;
+	}
+
+	public void setErrMsg(String errMsg) {
+		this.errMsg = errMsg;
+	}
 
 	public Object getObj() {
 		return data;
 	}
 
-
 	public void setObj(Object obj) {
 		this.data = obj;
 	}
 
-	 public AjaxResult success() {
-	    this.meta = new Meta(true, SUCCESS);
-	    return this;
-	  }
-
-	  public AjaxResult success(Object data) {
-	    this.meta = new Meta(true, SUCCESS);
-	    this.data = data;
-	    return this;
-	  }
-
-	  public AjaxResult failure() {
-	    this.meta = new Meta(false, FAIL);
-	    return this;
-	  }
-
-	  public AjaxResult failure(String message) {
-	    this.meta = new Meta(false, message);
-	    return this;
-	  }
-	public class Meta {
-
-	    private boolean success;
-	    private String message;
-
-	    public Meta(boolean success) {
-	      this.success = success;
-	    }
-
-	    public Meta(boolean success, String message) {
-	      this.success = success;
-	      this.message = message;
-	    }
-
-	    public boolean isSuccess() {
-	      return success;
-	    }
-
-	    public String getMessage() {
-	      return message;
-	    }
-	  }
+  public AjaxResult success(Object data) {
+	this.setCode(AjaxResult.SUCCESS);
+	this.setErrMsg(null);
+    this.data = data;
+    return this;
+  }
+  public AjaxResult success() {
+	  return success(null);
+  }
+  
+  public AjaxResult fail(int code,String errMsg) {
+	  AjaxResult ar=new AjaxResult();
+	  ar.code=-1;
+	  ar.errMsg="未知系统错误";
+	  return  ar;
+  }
+  public AjaxResult fail(MyExceptionEnum myEnum) { 
+	  AjaxResult ar=new AjaxResult();
+	  this.code=myEnum.getCode();
+	this.errMsg=myEnum.getErrMsg();
+	  return  ar;
+  }
+  public AjaxResult fail() {
+	  AjaxResult ar=new AjaxResult();
+	  ar.code=-1;
+	  ar.errMsg="未知系统错误";
+	  return  ar;
+  }
+  
 }

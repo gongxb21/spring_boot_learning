@@ -22,13 +22,16 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gongxb21.demo.bean.User;
+import com.gongxb21.demo.exception.MyException;
 import com.gongxb21.demo.json.AjaxResult;
 import com.gongxb21.demo.repository.UserRepository;
+import com.gongxb21.demo.service.UserService;
 
 /**
  * @author gongxb
@@ -41,7 +44,8 @@ public class UserController {
 	Logger logger =LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	private UserRepository userRepository ;
-	
+	@Autowired
+	private UserService userService;
 	@RequestMapping(value="/index")
 	public String index() {
 		logger.info("index method");
@@ -96,16 +100,25 @@ public class UserController {
 		  if(bindingResult.hasErrors()) {
 			  logger.info(bindingResult.getFieldError().getDefaultMessage());
 		  }
-	    userRepository.save(user);
-	    return new AjaxResult().success();
+	    return new AjaxResult().success(userRepository.save(user));
 	  }
 
 	  // 处理删除
-	  @RequestMapping("/delete")
+	  @RequestMapping("/delete/{id}")
 	  @ResponseBody
-	  public AjaxResult delete(int id) {
+	  public AjaxResult delete(@PathVariable int id) {
+		  logger.info("id={}",id);
 	    int a = 1 / 0;
 	    userRepository.delete(id);
 	    return new AjaxResult().success();
+	  }
+	  
+	  @RequestMapping("/get/{id}")
+	  @ResponseBody
+	  public AjaxResult getUser(@PathVariable int id) throws MyException {
+		  logger.info("id={}",id);
+		 User user= userService.getUser(id);
+		 AjaxResult ar=new AjaxResult();
+		 return ar.success(user);
 	  }
 }
