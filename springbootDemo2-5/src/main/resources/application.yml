@@ -1,6 +1,6 @@
 server: 
-  port: 8080
-
+  port: 8081
+debug: true
 spring: 
   datasource: 
     driver-class-name: com.mysql.jdbc.Driver
@@ -14,5 +14,10 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5Dialect
   mvc: 
     view:
-      prefix: /WEB-INFO/page/
+      prefix: /WEB-INF/page/
       suffix: .jsp
+  devtools: 
+    restart: 
+      additional-paths: src/main/java
+#排除那个目录的文件不需要restart
+#spring.devtools.restart.exclude=static/**,public/**

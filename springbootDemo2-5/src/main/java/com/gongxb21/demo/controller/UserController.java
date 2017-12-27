@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.gongxb21.demo.bean.User;
 import com.gongxb21.demo.exception.MyException;
@@ -46,18 +47,21 @@ public class UserController {
 	private UserRepository userRepository ;
 	@Autowired
 	private UserService userService;
-	@RequestMapping(value="/index")
-	public String index() {
+	/*@RequestMapping(value="/index")
+	public ModelAndView index() {
 		logger.info("index method");
-		return "index";
-	}
+		ModelAndView model=new ModelAndView();
+		model.setViewName("index");
+		logger.info("index method777");
+		return model;
+	}*/
 	
-	@RequestMapping(value="/list")
-	public String list() {
-		logger.info(" list method");
-		return "user";
-	}
-	
+	// 显示用户列表页面
+	  @RequestMapping(value="list")
+	  public String list() {
+		  logger.info("list method");
+	    return "user";
+	  }
 	 // 把spring data的page进行转换，变成easyui需要的数据
 	  public <T> Map<String, Object> findEasyUIData(Page<T> page) {
 	    Map<String, Object> map = new HashMap<String, Object>();

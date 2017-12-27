@@ -18,11 +18,14 @@ public class SpringbootDemo25ApplicationTests {
 	}
 	@Test
 	public void save() {
-		System.out.println("22222");
-		User user=new  User();
-		user.setAge(19);
-		user.setName("name");
-		userRepository.save(user);
+		for(int i=20;i<40;i++) {
+			
+			System.out.println("22222");
+			User user=new  User();
+			user.setAge(i);
+			user.setName("name"+i);
+			userRepository.save(user);
+		}
 		}
 		
 	}

@@ -45,6 +45,7 @@
 				userForm.form("clear");
 				// 打开对话框，修改标题，然后居中
 				userDialog.dialog("open").dialog("setTitle", "添加用户");
+				userDatagrid.datagrid("reload");
 			},
 			updateUser : function() {
 				// 获取选中行数据
