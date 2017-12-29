@@ -111,15 +111,16 @@ public class UserController {
 	  @RequestMapping("/delete/{id}")
 	  @ResponseBody
 	  public AjaxResult delete(@PathVariable int id) {
+		  System.out.println( "controller delete method");
 		  logger.info("id={}",id);
-	    int a = 1 / 0;
 	    userRepository.delete(id);
 	    return new AjaxResult().success();
 	  }
 	  
-	  @RequestMapping("/get/{id}")
+	  @RequestMapping("/get")
 	  @ResponseBody
-	  public AjaxResult getUser(@PathVariable int id) throws MyException {
+	  public AjaxResult getUser(@RequestParam int id) throws MyException {
+		  System.out.println("getuser controller");
 		  logger.info("id={}",id);
 		 User user= userService.getUser(id);
 		 AjaxResult ar=new AjaxResult();
